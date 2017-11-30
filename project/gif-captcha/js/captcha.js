@@ -22,6 +22,11 @@
                     var image = obj.image, animatedImage = document.createElement('img');
                     animatedImage.src = image;
                     document.getElementById('captcha-block').appendChild(animatedImage);
+
+                    // Add audio player
+                    var audio = document.createElement('audio');
+                    audio.id = 'captcha-audio';
+                    document.getElementById('captcha-block').appendChild(audio);
                 }
             });
         };
