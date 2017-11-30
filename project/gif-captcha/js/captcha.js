@@ -29,11 +29,9 @@
 
     var main = new gifCaptcha();
     var images = [
-        'img/tree/1.jpg',
-        'img/random/1.jpg',
-        'img/tree/9.jpg',
-        'img/tree/10.jpg',
-        'img/random/3.jpg'
+        'http://i.imgur.com/2OO33vX.png',
+        'http://i.imgur.com/qOwVaSN.png',
+        'http://i.imgur.com/Vo5mFZJ.gif'
     ];
 
     main.createGIF(images);
