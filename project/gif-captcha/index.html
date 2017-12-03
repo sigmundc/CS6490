@@ -23,7 +23,8 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <!-- Add fixed-top class to stick to the top -->
     <a class="navbar-brand" href="#">GIF Captcha</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
       aria-expanded="false" aria-label="Toggle navigation">
@@ -79,26 +80,70 @@
           <div class="card mb-3">
             <!--  style="max-width: 20rem;"> -->
             <!-- <div class="card-header">Header</div> -->
-            <div id="captcha-block" class="card-body bg-light">
+            <div class="card-body bg-light">
               <!-- <h4 class="card-title">Light card title</h4> -->
-              <p class="card-text">GIF Captcha goes here</p>
-              <div class="controls" style="float: right;">
-                <button class="btn btn-default" onclick="document.getElementById('captcha-player').play()">
-                  <span class="oi oi-media-play" title="play" aria-hidden="true"></span>
-                </button>
-                <button class="btn btn-default">
+              <div class="card-text row">
+                <div class="col-md-9">
+                  Please listen to the challenge by clicking the play button and interact accordingly.
+                </div>
+                <div class="controls col-md-3">
+                  <button class="btn btn-default" onclick="document.getElementById('captcha-player').play()">
+                    <span class="oi oi-media-play" title="play" aria-hidden="true" style="padding: 2px;"></span>
+                  </button>
+                  <button class="btn btn-default">
                     <span class="oi oi-reload" title="play" aria-hidden="true"></span>
                   </button>
+                </div>
+              </div>
+              <div id="captcha-block" class="">
+                <div class="captcha-img selected">
+                  <img src="img/car/1.jpg" alt="" width="100" height="100">
+                  <!-- <input type="checkbox" style="display: none;"> -->
+                  <span class="overlay"></span>
+                  <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
+                </div>
+                <div class="captcha-img">
+                  <img src="img/tree/3.png" alt="" width="100" height="100">
+                  <span class="overlay"></span>
+                </div>
+                <div class="captcha-img">
+                  <img src="img/random/5.jpg" alt="" width="100" height="100">
+                  <span class="overlay"></span>
+                </div>
+                <div class="captcha-img">
+                  <img src="img/tree/2.jpg" alt="" width="100" height="100">
+                  <span class="overlay"></span>
+                </div>
+                <div class="captcha-img">
+                  <img src="img/car/4.jpeg" alt="" width="100" height="100">
+                  <span class="overlay"></span>
+                </div>
+                <div class="captcha-img">
+                  <img src="img/tree/6.png" alt="" width="100" height="100">
+                  <span class="overlay"></span>
+                </div>
+                <div class="captcha-img">
+                  <img src="img/tree/7.jpg" alt="" width="100" height="100">
+                  <span class="overlay"></span>
+                </div>
+                <div class="captcha-img">
+                  <img src="img/car/3.jpg" alt="" width="100" height="100">
+                  <span class="overlay"></span>
+                </div>
+                <div class="captcha-img">
+                  <img src="img/car/7.jpg" alt="" width="100" height="100">
+                  <span class="overlay"></span>
+                </div>
               </div>
             </div>
-            <div class="card-footer bg-transparent">
+            <!-- <div class="card-footer bg-transparent">
               <div class="row">
                 <label for="" class="col-md-4 col-form-label">Answer</label>
                 <div class="col-md-8">
                   <input type="text" class="form-control" placeholder="Enter answer here">
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <button type="submit" class="btn btn-lg btn-primary btn-block">Sign Up</button>
         </form>
