@@ -44,10 +44,82 @@
     // main.createGIF(images);
 
     function iCaptcha() {
+        this.selectedImages = [];
+        var self = this;
+
+        this.init = function () {
+            // Assign click event listener (event bubbling)
+            var captchaBlock = document.getElementById('captcha-block');
+            captchaBlock.onclick = this.selectImage;
+
+            // var form = document.form;
+            // console.log(form);
+            document.getElementById('btn-submit').onclick = this.signUp;
+        }
+
+        this.selectImage = function (event) {
+            // console.log(event);
+            // Toggle class name to show selection on the UI
+            var selection = event.target.parentNode;
+            selection.classList.toggle('selected');
+
+
+            if (self.selectedImages.indexOf(selection.id) > -1) {
+                self.selectedImages.splice(self.selectedImages.indexOf(selection.id), 1);
+            } else {
+                // Add to selection
+                self.selectedImages.push(selection.id);
+            }
+            // console.log("selection: ");
+            // console.log(self.selectedImages);
+        };
+
+        this.signUp = function (e) {
+            // e.preventDefault();
+
+            console.log('Sign Up button clicked..');
+            var emailElement = document.getElementById("email");
+            var passwordElement = document.getElementById("password");
+            var email = emailElement.value;
+            var password = passwordElement.value;
+
+            // Clear validation
+            emailElement.classList.remove('is-invalid');
+            passwordElement.classList.remove('is-invalid');
+            var errors = 0;
+
+            if (!self.validateEmail(email)) {
+                // Add validation error to UI here
+                emailElement.classList.add('is-invalid');
+                errors++;
+            }
+            if (password.length < 8) {
+                passwordElement.classList.add('is-invalid');
+                errors++;
+            }
+
+            if (errors > 0) {
+                console.log("form validation failed.");
+                return;
+            }
+
+            // console.log(email);
+            // console.log(password);
+            // console.log(self.selectedImages);
+        }
+
         this.createCaptcha = function (images) {
-            
+
             var image = document.createElement('img');
         };
+
+        this.validateEmail = function (email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
     }
+
+    var main = new iCaptcha();
+    main.init();
 
 })();

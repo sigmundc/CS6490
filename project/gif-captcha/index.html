@@ -65,15 +65,15 @@
       <div class="col-md-4"></div>
       <div class="col-md-4">
         <h1>Sign Up</h1>
-        <form action="">
+        <form id="my-form"></form>
           <div class="form-group">
             <label for="">Email Address</label>
-            <input type="email" class="form-control">
+            <input id="email" name="email" type="email" class="form-control" required>
             <small class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
             <label for="">Password</label>
-            <input type="password" class="form-control">
+            <input id="password" name="password" type="password" class="form-control" required>
           </div>
 
           <!-- GIF Captcha goes here -->
@@ -95,44 +95,52 @@
                   </button>
                 </div>
               </div>
-              <div id="captcha-block" class="">
-                <div class="captcha-img selected">
+              <div id="captcha-block" class="" onclick="main.selectImage()">
+                <div id="img-1" class="captcha-img">
                   <img src="img/car/1.jpg" alt="" width="100" height="100">
                   <!-- <input type="checkbox" style="display: none;"> -->
                   <span class="overlay"></span>
                   <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
                 </div>
-                <div class="captcha-img">
+                <div id="img-2" class="captcha-img">
                   <img src="img/tree/3.png" alt="" width="100" height="100">
                   <span class="overlay"></span>
+                  <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
                 </div>
-                <div class="captcha-img">
+                <div id="img-3" class="captcha-img">
                   <img src="img/random/5.jpg" alt="" width="100" height="100">
                   <span class="overlay"></span>
+                  <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
                 </div>
-                <div class="captcha-img">
+                <div id="img-4" class="captcha-img">
                   <img src="img/tree/2.jpg" alt="" width="100" height="100">
                   <span class="overlay"></span>
+                  <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
                 </div>
-                <div class="captcha-img">
+                <div id="img-5" class="captcha-img">
                   <img src="img/car/4.jpeg" alt="" width="100" height="100">
                   <span class="overlay"></span>
+                  <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
                 </div>
-                <div class="captcha-img">
+                <div id="img-6" class="captcha-img">
                   <img src="img/tree/6.png" alt="" width="100" height="100">
                   <span class="overlay"></span>
+                  <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
                 </div>
-                <div class="captcha-img">
+                <div id="img-7" class="captcha-img">
                   <img src="img/tree/7.jpg" alt="" width="100" height="100">
                   <span class="overlay"></span>
+                  <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
                 </div>
-                <div class="captcha-img">
+                <div id="img-8" class="captcha-img">
                   <img src="img/car/3.jpg" alt="" width="100" height="100">
                   <span class="overlay"></span>
+                  <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
                 </div>
-                <div class="captcha-img">
+                <div id="img-9" class="captcha-img">
                   <img src="img/car/7.jpg" alt="" width="100" height="100">
                   <span class="overlay"></span>
+                  <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
                 </div>
               </div>
             </div>
@@ -145,7 +153,7 @@
               </div>
             </div> -->
           </div>
-          <button type="submit" class="btn btn-lg btn-primary btn-block">Sign Up</button>
+          <button id="btn-submit" type="submit" class="btn btn-lg btn-primary btn-block">Sign Up</button>
         </form>
       </div>
       <div class="col-md-4"></div>

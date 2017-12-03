@@ -36,10 +36,15 @@ main {
 
 .captcha-img:hover .overlay {
   opacity: 0.5;
+  background: #bfbfbf;
 }
 
 .captcha-img.selected .overlay {
   opacity: 0.5;
+}
+
+.captcha-img.captcha-img.selected span.oi-circle-check {
+  display: block;
 }
 
 .captcha-img .oi-circle-check {
@@ -49,4 +54,7 @@ main {
   bottom: 5px;
   top: unset;
   right: 5px;
+  display: none;
 }
+
+/* From validation*/
