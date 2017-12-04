@@ -58,11 +58,8 @@
             // console.log(form);
             document.getElementById('btn-submit').onclick = this.signUp;
 
-            // Add audio player - audio challenge
-            var audio = document.createElement('audio');
-            audio.id = 'captcha-player';
-            audio.src = 'audio/c1.mp3';
-            document.getElementById('captcha-block').appendChild(audio);
+            // Refresh button
+            document.getElementById('btn-refresh').onclick = this.refreshCaptcha;
 
             // Get challenges from challenges.json
             self.getCaptcha();
@@ -117,8 +114,8 @@
             // console.log(email);
             // console.log(password);
             // console.log(self.selectedImages);
-            var cKey = Object.keys(self.currentChallenge);
-            self.verifyCaptcha(self.selectedImages, self.currentChallenge[cKey].answers);
+            // var cKey = Object.keys(self.currentChallenge);
+            self.verifyCaptcha(self.selectedImages, self.currentChallenge.answers);
         }
 
         this.getCaptcha = function () {
@@ -128,9 +125,10 @@
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         self.challenges = JSON.parse(xhr.responseText).challenges;
-                        
-                        // TODO: Randomly select a challenge here
-                        self.currentChallenge = self.challenges[0];
+
+                        // Randomly select a challenge here
+                        var rand = self.getRandomInt(0, self.challenges.length);
+                        self.currentChallenge = self.challenges[rand];
                         self.createCaptcha(self.currentChallenge);
                     } else {
                         console.error(xhr.statusText);
@@ -149,12 +147,12 @@
             //     <span class="overlay"></span>
             //     <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
             //   </div>
-            var cKey = Object.keys(challenge);
+            // var cKey = Object.keys(challenge);
 
             // Captcha container
             var container = document.getElementById('captcha-block');
 
-            for (var i = 0; i < challenge[cKey].images.length; i++) {
+            for (var i = 0; i < challenge.images.length; i++) {
                 // Div containter
                 var div = document.createElement('div');
                 div.classList.add('captcha-img');
@@ -162,10 +160,10 @@
 
                 // Image
                 var img = document.createElement('img');
-                img.src = challenge[cKey].images[i];
+                img.src = challenge.images[i];
                 img.width = 100;
                 img.height = 100;
-                img.alt = "image-" + (i+1);
+                img.alt = "image-" + (i + 1);
 
                 // Overlay
                 var overlay = document.createElement('span');
@@ -188,7 +186,33 @@
                 container.appendChild(div);
             }
 
+            // Add audio player - audio challenge
+            var audio = document.createElement('audio');
+            audio.id = 'captcha-player';
+            audio.src = challenge.audio;
+            document.getElementById('captcha-block').appendChild(audio);
+
         };
+
+        this.refreshCaptcha = function () {
+            self.selectedImages = [];
+            console.log("refreshing captcha")
+            // Remove existing images
+            var block = document.getElementById('captcha-block');
+            block.innerHTML = "";
+            var rand = self.getRandomInt(0, self.challenges.length);
+            self.currentChallenge = self.challenges[rand];
+
+            setTimeout(function () {
+                self.createCaptcha(self.currentChallenge);                
+            }, 1000);
+        };
+
+        this.getRandomInt = function (min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+        }
 
         this.verifyCaptcha = function (userInput, answers) {
             var notMatch = false;
@@ -204,6 +228,7 @@
             }
             if (notMatch) {
                 console.log("Captcha challenge failed.");
+                alert("Hmm, Captcha challenge failed!");
                 console.log("user input: ");
                 console.log(userInput);
 
@@ -211,6 +236,7 @@
                 console.log(answers);
             } else {
                 console.log("Captcha challenge passed!");
+                alert("Captcha challenge passed!");
             }
         }
 

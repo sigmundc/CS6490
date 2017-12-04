@@ -1,28 +1,86 @@
 {
     "challenges": [
         {
-            "c1": {
-                "images": [
-                    "img/car/1.jpg",
-                    "img/tree/1.jpg",
-                    "img/random/1.jpg",
-                    "img/random/2.jpg",
-                    "img/random/3.jpg",
-                    "img/random/4.jpg",
-                    "img/car/2.jpg",
-                    "img/car/3.jpg",
-                    "img/tree/2.jpg"
-                ],
-                "answers": [
-                    "img-2",
-                    "img-3",
-                    "img-4",
-                    "img-5",
-                    "img-6",
-                    "img-9"
-                ],
-                "audio": "audio/c1.mp3"
-            }
+            "name": "c1",
+            "images": [
+                "img/car/1.jpg",
+                "img/tree/1.jpg",
+                "img/random/1.jpg",
+                "img/random/2.jpg",
+                "img/random/3.jpg",
+                "img/random/4.jpg",
+                "img/car/2.jpg",
+                "img/car/3.jpg",
+                "img/tree/2.jpg"
+            ],
+            "answers": [
+                "img-2",
+                "img-3",
+                "img-4",
+                "img-5",
+                "img-6",
+                "img-9"
+            ],
+            "audio": "audio/c1.mp3"
+        },
+        {
+            "name": "c2",
+            "images": [
+                "img/car/2.jpg",
+                "img/tree/2.jpg",
+                "img/random/5.jpg",
+                "img/random/2.jpg",
+                "img/random/7.jpg",
+                "img/random/9.jpg",
+                "img/tree/2.jpg",
+                "img/tree/3.png",
+                "img/car/3.jpg"
+            ],
+            "answers": [
+                "img-4",
+                "img-5",
+                "img-9"
+            ],
+            "audio": "audio/c2.mp3"
+        },
+        {
+            "name": "c3",
+            "images": [
+                "img/car/2.jpg",
+                "img/tree/2.jpg",
+                "img/random/5.jpg",
+                "img/tree/9.jpg",
+                "img/random/7.jpg",
+                "img/random/9.jpg",
+                "img/tree/5.jpg",
+                "img/tree/3.png",
+                "img/car/3.jpg"
+            ],
+            "answers": [
+                "img-2",
+                "img-4",
+                "img-7",
+                "img-8"
+            ],
+            "audio": "audio/c3.mp3"
+        },
+        {
+            "name": "c4",
+            "images": [
+                "img/random/5.jpg",
+                "img/car/9.jpg",
+                "img/car/10.jpg",
+                "img/random/8.jpg",
+                "img/tree/10.jpg",
+                "img/random/9.jpg",
+                "img/tree/6.png",
+                "img/car/3.jpg",
+                "img/random/3.jpg"
+            ],
+            "answers": [
+                "img-2"
+            ],
+            "audio": "audio/c4.mp3"
         }
     ]
 }
