@@ -1,0 +1,28 @@
+{
+    "challenges": [
+        {
+            "c1": {
+                "images": [
+                    "img/car/1.jpg",
+                    "img/tree/1.jpg",
+                    "img/random/1.jpg",
+                    "img/random/2.jpg",
+                    "img/random/3.jpg",
+                    "img/random/4.jpg",
+                    "img/car/2.jpg",
+                    "img/car/3.jpg",
+                    "img/tree/2.jpg"
+                ],
+                "answers": [
+                    "img-2",
+                    "img-3",
+                    "img-4",
+                    "img-5",
+                    "img-6",
+                    "img-9"
+                ],
+                "audio": "audio/c1.mp3"
+            }
+        }
+    ]
+}

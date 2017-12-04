@@ -45,6 +45,7 @@
 
     function iCaptcha() {
         this.selectedImages = [];
+        this.challenges = {};
         var self = this;
 
         this.init = function () {
@@ -55,6 +56,15 @@
             // var form = document.form;
             // console.log(form);
             document.getElementById('btn-submit').onclick = this.signUp;
+
+            // Add audio player - audio challenge
+            var audio = document.createElement('audio');
+            audio.id = 'captcha-player';
+            audio.src = 'audio/c1.mp3';
+            document.getElementById('captcha-block').appendChild(audio);
+
+            // Get challenges from challenges.json
+            self.getCaptcha();
         }
 
         this.selectImage = function (event) {
@@ -105,12 +115,75 @@
 
             // console.log(email);
             // console.log(password);
-            // console.log(self.selectedImages);
+            console.log(self.selectedImages);
         }
 
-        this.createCaptcha = function (images) {
+        this.getCaptcha = function () {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "data/challenges.json", true);
+            xhr.onload = function (e) {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        self.challenges = JSON.parse(xhr.responseText).challenges;
 
-            var image = document.createElement('img');
+                        // TODO: Randomly select a challenge here
+                        self.createCaptcha(self.challenges[0]);
+                    } else {
+                        console.error(xhr.statusText);
+                    }
+                }
+            };
+            xhr.onerror = function (e) {
+                console.error(xhr.statusText);
+            };
+            xhr.send(null);
+        };
+
+        this.createCaptcha = function (challenge) {
+            //     <div id="img-9" class="captcha-img">
+            //     <img src="img/car/7.jpg" alt="" width="100" height="100">
+            //     <span class="overlay"></span>
+            //     <span class="oi oi-circle-check text-primary" title="selected" aria-hidden="true"></span>
+            //   </div>
+            var cKey = Object.keys(challenge);
+
+            // Captcha container
+            var container = document.getElementById('captcha-block');
+
+            for (var i = 0; i < challenge[cKey].images.length; i++) {
+                // Div containter
+                var div = document.createElement('div');
+                div.classList.add('captcha-img');
+                div.id = 'img-' + (i + 1);
+
+                // Image
+                var img = document.createElement('img');
+                img.src = challenge[cKey].images[i];
+                img.width = 100;
+                img.height = 100;
+                img.alt = "image-" + (i+1);
+
+                // Overlay
+                var overlay = document.createElement('span');
+                overlay.classList.add('overlay');
+
+                // Circle-check
+                var circle = document.createElement('span');
+                circle.classList.add('oi');
+                circle.classList.add('oi-circle-check');
+                circle.classList.add('text-primary');
+                circle.title = "selected";
+                circle.setAttribute('aria-hidden', 'true');
+
+                // Add children to div
+                div.appendChild(img);
+                div.appendChild(overlay);
+                div.appendChild(circle);
+
+                // Append to captcha-block container
+                container.appendChild(div);
+            }
+
         };
 
         this.validateEmail = function (email) {
