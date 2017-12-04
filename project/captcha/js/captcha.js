@@ -238,6 +238,7 @@
                 console.log("Captcha challenge passed!");
                 alert("Captcha challenge passed!");
             }
+            self.refreshCaptcha();
         }
 
         this.validateEmail = function (email) {
