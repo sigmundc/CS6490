@@ -46,6 +46,7 @@
     function iCaptcha() {
         this.selectedImages = [];
         this.challenges = {};
+        this.currentChallenge = {};
         var self = this;
 
         this.init = function () {
@@ -115,7 +116,9 @@
 
             // console.log(email);
             // console.log(password);
-            console.log(self.selectedImages);
+            // console.log(self.selectedImages);
+            var cKey = Object.keys(self.currentChallenge);
+            self.verifyCaptcha(self.selectedImages, self.currentChallenge[cKey].answers);
         }
 
         this.getCaptcha = function () {
@@ -125,9 +128,10 @@
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         self.challenges = JSON.parse(xhr.responseText).challenges;
-
+                        
                         // TODO: Randomly select a challenge here
-                        self.createCaptcha(self.challenges[0]);
+                        self.currentChallenge = self.challenges[0];
+                        self.createCaptcha(self.currentChallenge);
                     } else {
                         console.error(xhr.statusText);
                     }
@@ -185,6 +189,30 @@
             }
 
         };
+
+        this.verifyCaptcha = function (userInput, answers) {
+            var notMatch = false;
+            if (answers.length != userInput.length) {
+                notMatch = true;
+            } else {
+                for (var j = 0; j < userInput.length; j++) {
+                    if (answers.indexOf(userInput[j]) === -1) {
+                        notMatch = true;
+                        break;
+                    }
+                }
+            }
+            if (notMatch) {
+                console.log("Captcha challenge failed.");
+                console.log("user input: ");
+                console.log(userInput);
+
+                console.log("answers: ");
+                console.log(answers);
+            } else {
+                console.log("Captcha challenge passed!");
+            }
+        }
 
         this.validateEmail = function (email) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
