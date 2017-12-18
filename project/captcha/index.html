@@ -65,15 +65,15 @@
       <div class="col-md-4"></div>
       <div class="col-md-4">
         <h1>Sign Up</h1>
-        <form id="my-form"></form>
+        <form id="my-form">
           <div class="form-group">
             <label for="">Email Address</label>
-            <input id="email" name="email" type="email" class="form-control" required>
+            <input id="email" name="email" type="email" class="form-control" required value="demo@demo.com"> <!-- Hardcoded values for demo purposes. -->
             <small class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
             <label for="">Password</label>
-            <input id="password" name="password" type="password" class="form-control" required>
+            <input id="password" name="password" type="password" class="form-control" required value="some-strong-pass"> <!-- hardcoded values for demo purposes. -->
             <small class="form-text text-muted">Password needs to be at least 8 characters in length.</small>
           </div>
 
@@ -88,13 +88,18 @@
                   Please listen to the challenge by clicking the play button and interact accordingly.
                 </div>
                 <div class="controls col-md-3">
-                  <button class="btn btn-default" onclick="document.getElementById('captcha-player').play()">
+                  <button class="btn btn-default" type="button" onclick="document.getElementById('captcha-player').play()">
                     <span class="oi oi-media-play" title="play" aria-hidden="true" style="padding: 2px;"></span>
                   </button>
-                  <button class="btn btn-default" id="btn-refresh">
+                  <button class="btn btn-default" type="button" id="btn-refresh">
                     <span class="oi oi-reload" title="refresh" aria-hidden="true"></span>
                   </button>
                 </div>
+              </div>
+              <div class="text-right">
+                <small>
+                  <span id="timer-text"></span>
+                  <span id="refresh-timer" class="text-primary"></span></small>
               </div>
               <div id="captcha-block" class="" onclick="main.selectImage()">
                 <!-- <div id="img-1" class="captcha-img">

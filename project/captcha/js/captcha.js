@@ -1,5 +1,6 @@
 (function () {
 
+    // @depracated GIF captcha
     // function gifCaptcha() {
     //     this.createGIF = function (images) {
     //         gifshot.createGIF({
@@ -48,15 +49,23 @@
         this.challenges = {};
         this.currentChallenge = {};
         var self = this;
+        this.deadline = new Date();
+        this.timeInterval = undefined;
 
         this.init = function () {
             // Assign click event listener (event bubbling)
             var captchaBlock = document.getElementById('captcha-block');
             captchaBlock.onclick = this.selectImage;
 
-            // var form = document.form;
+            var form = document.getElementById('my-form');
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                var f = e.target;
+                self.signUp();
+            });
             // console.log(form);
-            document.getElementById('btn-submit').onclick = this.signUp;
+            // Alternate way to submit
+            // document.getElementById('btn-submit').onclick = this.signUp;
 
             // Refresh button
             document.getElementById('btn-refresh').onclick = this.refreshCaptcha;
@@ -70,7 +79,6 @@
             // Toggle class name to show selection on the UI
             var selection = event.target.parentNode;
             selection.classList.toggle('selected');
-
 
             if (self.selectedImages.indexOf(selection.id) > -1) {
                 self.selectedImages.splice(self.selectedImages.indexOf(selection.id), 1);
@@ -192,11 +200,59 @@
             audio.src = challenge.audio;
             document.getElementById('captcha-block').appendChild(audio);
 
+            // Set timer for 50 seconds
+            document.getElementById('timer-text').innerHTML = 'Refresh in ';
+            clearInterval(self.timeInterval);
+            var timeLimit = 50;
+            var currentTime = Date.parse(new Date());
+            self.deadline = new Date(currentTime + timeLimit * 1000);
+            self.startTimer('refresh-timer', self.deadline);
+        };
+
+        /**
+         * Source: https://www.sitepoint.com/build-javascript-countdown-timer-no-dependencies/
+         */
+        this.startTimer = function (id, endtime) {
+            var timer = document.getElementById(id);
+
+            function updateTimer () {
+                var t = self.getTimeRemaining(endtime);
+                var timer = document.getElementById('refresh-timer');
+                timer.innerHTML = t.seconds + 's';
+    
+                if (t.total <= 0) {
+                    // clearInterval(self.timeInterval);
+                    self.refreshCaptcha();
+                }
+            };
+            updateTimer();
+            self.timeInterval = setInterval(updateTimer, 1000);
+        };
+
+        this.getTimeRemaining = function (endtime) {
+            var t = Date.parse(endtime) - Date.parse(new Date());
+            var seconds = Math.floor((t / 1000) % 60);
+            var minutes = Math.floor((t / 1000 / 60) % 60);
+            var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+            var days = Math.floor(t / (1000 * 60 * 60 * 24));
+            return {
+                'total': t,
+                'days': days,
+                'hours': hours,
+                'minutes': minutes,
+                'seconds': seconds
+            };
         };
 
         this.refreshCaptcha = function () {
             self.selectedImages = [];
             console.log("refreshing captcha")
+            
+            // Reset timer
+            clearInterval(self.timeInterval);
+            document.getElementById('refresh-timer').innerHTML = '';
+            document.getElementById('timer-text').innerHTML = 'Refreshing...';
+
             // Remove existing images
             var block = document.getElementById('captcha-block');
             block.innerHTML = "";
@@ -204,7 +260,7 @@
             self.currentChallenge = self.challenges[rand];
 
             setTimeout(function () {
-                self.createCaptcha(self.currentChallenge);                
+                self.createCaptcha(self.currentChallenge);
             }, 1000);
         };
 
